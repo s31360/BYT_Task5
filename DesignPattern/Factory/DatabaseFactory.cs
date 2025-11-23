@@ -2,9 +2,19 @@
 {
     public static class DatabaseFactory
     {
-        //public static IDatabase CreateDatabase(...)
-        //{
-        //  ...
-        //}
+        public static IDatabase CreateDatabase(DatabaseType type)
+        {
+            switch (type)
+            {
+                case DatabaseType.SqlServer:
+                    return new SqlServerDatabase();
+
+                case DatabaseType.Oracle:
+                    return new OracleDatabase();
+
+                default:
+                    throw new System.ArgumentException("Unknown database type", nameof(type));
+            }
+        }
     }
 }
